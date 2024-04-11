@@ -1,0 +1,27 @@
+{% extends 'default.html' %}
+{% block title %}Page des Departements{% endblock %}
+{% block content %}
+<h1>Bienvenue dans notre page Departement</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Nom</th>
+        <th scope="col">Emplacement</th>
+        <th scope="col">Direction</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for i in liste_departements%}
+    
+      <tr>
+        <td>{{i.nom}}</td>
+        <td>{{i.direction}}</td>
+        <td>{{i.emplacement}}</td>
+      </tr>
+    
+    {% endfor %}
+    </tbody>
+  </table>
+  <a href="{{url_for('add_departement')}}" class="btn btn-success">Ajouter Departement</a>
+  <a href="{{url_for('del_departement')}}" class="btn btn-danger">Supprimer Departement</a>
+{% endblock %}

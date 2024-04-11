@@ -1,0 +1,18 @@
+{% extends 'default.html' %}
+
+{% block title %}Supprimer Employe{% endblock %}
+
+{% block content %}
+
+<h1>Entrer le matricule</h1>
+<form action="{{url_for ('del_employe') }}" method="post" class="container">
+    <div class="form-floating mb-3">
+      <input required name="matricule" type="text" class="form-control" id="matricule" placeholder="" >
+      <label for="matricule">Matricule</label>
+    </div>
+    <input type="submit" value="Supprimer l'Employe" class="btn btn-success">
+  </form>
+  <br>
+  <a href="{{url_for('employes')}}" class="btn btn-warning">Retour vers Employes</a>
+
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'default.html' %}
+
+{% block title %}Ajout Departement{% endblock %}
+
+{% block content %}
+
+<h1>Remplir ces champ pour cree un Departement</h1>
+<div>
+    {% if message=='error' %}
+    <p class="alert alert-danger">SVP Remplir tout les champs!</p>
+    {% elif message == 'failure'%}
+    <p class="alert alert-warning">Invalide! Si l'erreur persiste Contacter un administrateur</p>
+    {% elif message =='success'%}
+    <p class="alert alert-success">Departement ajoute avec succes!</p>
+    {%endif%}
+    
+</div>
+<form action="{{url_for ('add_departement') }}" method="post" class="container">
+    <div class="form-floating mb-3">
+      <input name="nom" type="text" class="form-control" id="nom" placeholder="" >
+      <label for="nom">Nom</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input name="emplacement" type="text" class="form-control" id="emplacement" placeholder="" >
+      <label for="emplacement">Emplacement</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input name="direction" type="text" class="form-control" id="direction" placeholder="" >
+      <label for="direction">Direction</label>
+    </div>
+    <input type="submit" value="Ajouter Departement" class="btn btn-success">
+  </form>
+  <br>
+  <a href="{{url_for('departements')}}" class="btn btn-warning">Retour vers departements</a>
+{% endblock %}

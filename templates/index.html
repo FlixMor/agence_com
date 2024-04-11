@@ -1,0 +1,21 @@
+{% extends 'default.html' %}
+
+{% block title  %} Home Page. {% endblock %}
+
+{% block content %}
+
+<h1>Bienvenue sur la Home Page</h1>
+
+{% if 'username' in session %}
+    <p>Bienvenue {{ session['nom_complet'] }}</p>
+{% endif %}
+
+<br>
+<br>
+
+<br>
+<div style="text-align: center;">
+    <img src="/static/background.png" alt="Description of the image">
+</div>
+
+{% endblock %}

@@ -1,0 +1,43 @@
+{% extends 'default.html' %}
+
+{% block title %}Ajout Employe{% endblock %}
+
+{% block content %}
+
+<h1>Remplir ces champ pour cree un employe</h1>
+<div>
+      {% if message=='error' %}
+      <p class="alert alert-danger">SVP Remplir tout les champs!</p>
+      {% elif message == 'failure'%}
+      <p class="alert alert-warning">Invalide! Si l'erreur persiste Contacter un administrateur</p>
+      {% elif message =='success'%}
+      <p class="alert alert-success">Employe ajoute avec succes!</p>
+      {%endif%}
+      
+</div>
+<form action="{{url_for ('add_employe') }}" method="post" class="container">
+    <div class="form-floating mb-3">
+      <input name="nom" type="text" class="form-control" id="nom" placeholder="" >
+      <label for="nom">Nom</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input  name="prenom" type="text" class="form-control" id="prenom" placeholder="" >
+      <label for="prenom">Prenom</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input  name="matricule" type="text" class="form-control" id="matricule" placeholder="" >
+      <label for="matricule">Matricule</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input  name="fonction" type="text" class="form-control" id="fonction" placeholder="" >
+      <label for="fonction">Fonction</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input  name="departement" type="text" class="form-control" id="departement" placeholder="" >
+      <label for="departement">Departement</label>
+    </div>
+    <input type="submit" value="Ajouter Employe" class="btn btn-success">
+  </form>
+  <br>
+  <a href="{{url_for('employes')}}" class="btn btn-warning">Retour vers Employes</a>
+{% endblock %}

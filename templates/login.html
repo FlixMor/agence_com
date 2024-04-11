@@ -1,0 +1,31 @@
+{% extends 'default.html' %}
+
+{% block title %}Login Page{% endblock %}
+
+{% block content %}
+
+<h1>Bienvenue dans notre page de connexion</h1>
+<br>
+<br>
+<div>
+      {% if message=='error' %}
+      <p class="alert alert-danger">Impossible de se connecter!</p>
+      {% elif message == 'invalide'%}
+      <p class="alert alert-warning">SVP Remplir tout les champs.</p>
+      {% elif message =='success'%}
+      <p class="alert alert-success">Connecter avec succes!</p>
+      {%endif%}
+</div>
+<form action="{{url_for ('login') }}" method="post" class="container">
+    <div class="form-floating mb-3">
+      <input name="username" type="text" class="form-control" id="username" placeholder="" >
+      <label for="username">Username</label>
+    </div>
+    <div class="form-floating mb-3">
+      <input  name="password" type="password" class="form-control" id="password" placeholder="" >
+      <label for="password">Password</label>
+    </div>
+    
+    <input type="submit" value="Connexion" class="btn btn-primary">
+  </form>
+{% endblock %}

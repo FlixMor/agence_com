@@ -1,0 +1,17 @@
+{% extends 'default.html' %}
+
+{% block title %}Supprimer Departement{% endblock %}
+
+{% block content %}
+
+<h1>Entrer le Nom du departement</h1>
+<form action="{{url_for ('del_departement') }}" method="post" class="container">
+    <div class="form-floating mb-3">
+      <input required name="nom" type="text" class="form-control" id="nom" placeholder="" >
+      <label for="nom">Nom</label>
+    </div>
+    <input type="submit" value="Supprimer le departement" class="btn btn-success">
+  </form>
+  <br>
+<a href="{{url_for('departements')}}" class="btn btn-warning">Retour vers departements</a>
+{% endblock %}

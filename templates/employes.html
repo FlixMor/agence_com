@@ -1,0 +1,32 @@
+{% extends 'default.html' %}
+{% block title %}Page des Employes{% endblock %}
+{% block content %}
+<h1>Bienvenue dans notre page Employes</h1>
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Matricule</th>        
+        <th scope="col">Prenom</th>
+        <th scope="col">Nom</th>
+        <th scope="col">Fonction</th>
+        <th scope="col">Departement</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for i in liste_employes%}
+    
+      <tr>
+        <td>{{i.matricule}}</td>        
+        <td>{{i.prenom}}</td>
+        <td>{{i.nom}}</td>
+        <td>{{i.fonction}}</td>
+        <td>{{i.departement}}</td>
+      </tr>
+    
+    {% endfor %}
+    </tbody>
+  </table>
+  <a href="{{url_for('add_employe')}}" class="btn btn-success">Ajouter Employe</a>
+  <a href="{{url_for('del_employe')}}" class="btn btn-danger">Supprimer Employe</a>
+
+{% endblock %}
