@@ -25,16 +25,22 @@ def services():
 
 @app.route('/employes')
 def employes():
+    if 'username' not in session:
+        return redirect(url_for('login'))
     (liste_employes,message) = EmployeDAO.lister_employes()
     return render_template('employes.html', liste_employes=liste_employes)
 
 @app.route('/departement')
 def departements():
+    if 'username' not in session:
+        return redirect(url_for('login'))
     (liste_departements, message) = DepartementDAO.lister_departements()
     return render_template('departements.html', liste_departements=liste_departements)
 
 @app.route('/add-employe', methods=['POST','GET'])
 def add_employe():
+    if 'username' not in session:
+        return redirect(url_for('login'))
     req = request.form
     message=None
     if request.method == 'POST':
@@ -54,6 +60,8 @@ def add_employe():
 
 @app.route('/add-departement', methods=['POST','GET'])
 def add_departement():
+    if 'username' not in session:
+        return redirect(url_for('login'))
     req = request.form
     print(req)
     message=None
@@ -69,6 +77,8 @@ def add_departement():
 
 @app.route('/del-employe', methods=['POST','GET'])
 def del_employe():
+    if 'username' not in session:
+        return redirect(url_for('login'))
     req = request.form
     if request.method == 'POST':
         matricule = req['matricule']
@@ -77,6 +87,8 @@ def del_employe():
     
 @app.route('/del-departement', methods=['POST','GET'])
 def del_departement():
+    if session['username'] != 'admin':
+        return redirect(url_for('login'))
     req = request.form
     if request.method == 'POST':
         nom = req['nom']
@@ -98,7 +110,6 @@ def login():
             if message == 'success' and user != None:
                 session['username'] = user[2] #on met la variable username dans la session
                 session['nom_complet'] = user[1] #on met la variable nom_complet dans la session
-
                 return redirect(url_for('home'))          
     return render_template('login.html', message=message, user=user)
 
@@ -113,8 +124,12 @@ def register():
         if nom_complet == '' or username == '' or password == '':
             message = 'invalide'
         else:
-            user = User(nom_complet,username,password)
-            message = UserDAO.add(user)
+            try:
+                user = User(nom_complet,username,password)
+                message = UserDAO.add(user)
+            except Exception as error:
+                message = 'failure'
+
     return render_template('register.html', message=message)
 
 @app.route('/logout',methods=['POST','GET'])

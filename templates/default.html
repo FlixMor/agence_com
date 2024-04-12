@@ -27,7 +27,7 @@
                     <li class="nav-item">
                         <a class="btn btn-ligh" type="button" href="{{url_for('services')}}">Nos Services</a>
                     </li>
-                    {% if 'username' in session %}
+                    {% if session['username'] == 'admin' %}
                     <div class="dropdown">
                         <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">Employes</button>
                         <ul class="dropdown-menu">
@@ -60,6 +60,7 @@
                             </div>
                         </div>
                     {% endif %}
+
                 </ul>
             </div>
         </div>
