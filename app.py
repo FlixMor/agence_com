@@ -1,4 +1,7 @@
 from flask import Flask, render_template, url_for, request, session, redirect
+from flask_bcrypt import Bcrypt
+
+
 from employes.employesDAO import  EmployeDAO
 from employes.employe import Employe
 from departements.departementDAO import DepartementDAO
@@ -7,6 +10,7 @@ from users.userDAO import UserDAO
 from users.user import User
 
 app = Flask(__name__)
+bcrypt = Bcrypt(app)
 app.secret_key = "clesecrete"
 
 # Routes
@@ -103,9 +107,13 @@ def login():
     if request.method == 'POST':
         username = req['username']
         password = req['password']
+        
         if username == '' or password == '':
             message = 'invalide'
         else:
+            #Hash password
+            #hashed_password = bcrypt.generate_password_hash(password)
+            #is_valid = bcrypt.check_password_hash (hashed_password, password)
             message, user = UserDAO.get_one(username,password)
             if message == 'success' and user != None:
                 session['username'] = user[2] #on met la variable username dans la session
@@ -121,6 +129,8 @@ def register():
         nom_complet = req['nom_complet']
         username = req['username']
         password = req['password']
+        #Hash password
+        #hashed_password = bcrypt.generate_password_hash(password)
         if nom_complet == '' or username == '' or password == '':
             message = 'invalide'
         else:
@@ -129,7 +139,6 @@ def register():
                 message = UserDAO.add(user)
             except Exception as error:
                 message = 'failure'
-
     return render_template('register.html', message=message)
 
 @app.route('/logout',methods=['POST','GET'])
